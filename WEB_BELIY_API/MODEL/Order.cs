@@ -11,7 +11,17 @@ namespace WEB_BELIY_API.MODEL
         [Key]
         public Guid IdOrder { get; set; }
 
-        public DateTime OrderCreateTime { get; set; }
+        public DateTime OrderDate { get; set; }
+
+        public string Status { get; set; }
+
+        public DateTime PaymentDate { get; set; }
+
+        public string PaymentMethods { get; set; }
+
+        public int TotalValue { get; set; }
+
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
 
     }
 }

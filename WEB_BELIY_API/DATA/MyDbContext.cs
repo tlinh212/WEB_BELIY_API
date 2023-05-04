@@ -21,6 +21,8 @@ namespace WEB_BELIY_API.DATA
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Cart> Carts { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
 
         #endregion

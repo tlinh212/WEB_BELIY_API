@@ -36,7 +36,7 @@ namespace WEB_BELIY_API.MODEL
 
         public double Discount { get; set; }
 
-        public double SaleRate { get; set; }       
+        public double SaleRate { get; set; }
 
     }
 }
