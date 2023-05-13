@@ -99,12 +99,13 @@ namespace WEB_BELIY_API.Controllers
                     return BadRequest();
                 }
 
-                importbill.IDSupp = importbill.IDSupp;
-                importbill.IDWare = importbill.IDWare;
-                importbill.Price = importbill.Price;
-                importbill.Quantity = importbill.Quantity;
-                importbill.TotalMoney = importbill.TotalMoney;
-                importbill.DateImport = importbill.DateImport;
+                importbill.IDSupp = importbilledit.IDSupp;
+                importbill.IDWare = importbilledit.IDWare;
+                importbill.Price = importbilledit.Price;
+                importbill.Quantity = importbilledit.Quantity;
+                importbill.TotalMoney = importbilledit.TotalMoney;
+                importbill.DateImport = importbilledit.DateImport;
+                Context.SaveChanges();
 
                 return Ok(importbill);
             }

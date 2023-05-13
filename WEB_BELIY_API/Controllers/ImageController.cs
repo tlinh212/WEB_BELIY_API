@@ -78,8 +78,10 @@ namespace WEB_BELIY_API.Controllers
                     return NotFound();
                 }
 
-                image.LinkImage = image.LinkImage;
-               
+                image.LinkImage = ImageEdit.LinkImage;
+                Context.SaveChanges();
+
+
                 return Ok();
             }
             catch

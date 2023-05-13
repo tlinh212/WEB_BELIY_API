@@ -9,20 +9,11 @@ namespace WEB_BELIY_API.MODEL
 {
     public class OrderDetail
     {
+        public Guid IdOrder { get; set; }
+        public Order Orders { get; set; }
 
-        [Required]
-        [Display(Name = "IDOrder")]
-        public virtual Guid IdOrder { get; set; }
-
-        [ForeignKey("IDOrder")]
-        public virtual Order Orders { get; set; }
-
-        [Required]
-        [Display(Name = "IDPro")]
-        public virtual Guid IDPro { get; set; }
-
-        [ForeignKey("IDPro")]
-        public virtual Product Product { get; set; }
+        public Guid IDPro { get; set; }
+        public Product Product { get; set; }
         public int Quantity { set; get; }
         public double Price { set; get; }
     }

@@ -75,8 +75,10 @@ namespace WEB_BELIY_API.Controllers
                     return BadRequest();
                 }
 
-                Category.Name = Category.Name;
-                Category.IDParent = Category.IDParent;
+                Category.Name = CategoryEdit.Name;
+                Category.IDParent = CategoryEdit.IDParent;
+                Context.SaveChanges();
+
 
                 return Ok();
             }

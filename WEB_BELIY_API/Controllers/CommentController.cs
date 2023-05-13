@@ -4,37 +4,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WEB_BELIY_API.DATA;
 using WEB_BELIY_API.MODEL;
-
+using WEB_BELIY_API.DATA;
 
 namespace WEB_BELIY_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class WareHouseController : ControllerBase
+    public class CommentController : ControllerBase
     {
         private readonly MyDbContext Context;
-        public WareHouseController(MyDbContext context)
+        public CommentController(MyDbContext context)
+
         {
             Context = context;
         }
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var ListWareHouse = Context.WareHouses.ToList();
 
-            return Ok(ListWareHouse);
-        }
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
             try
             {
-                var WareHouse = Context.WareHouses.SingleOrDefault(w => w.IDWare == id);
-                if (WareHouse != null)
+                var ListComment = Context.Comments.ToList().Where(i => i.IDPro == id);
+                if (ListComment != null)
                 {
-                    return Ok(WareHouse);
+                    return Ok(ListComment);
                 }
                 else
                 {
@@ -47,50 +41,56 @@ namespace WEB_BELIY_API.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Create(string NameWare, string Address)
+        public IActionResult Create(string IDCmt, string IdCus, string IDPro, int Rate, string Detail)
         {
             try
             {
-                var WareHouse = new WareHouse
+                var Comment = new Comment
                 {
-                    IDWare = Guid.NewGuid(),
-                    NameWare = NameWare,
-                    Address = Address,
+                    IDCmt = Guid.NewGuid(),
+                    IdCus = Guid.Parse(IdCus),
+                    IDPro = Guid.Parse(IDPro),
+                    Rate = Rate, 
+                    Detail = Detail,
+                    Enable = 1,
+
                 };
 
-                Context.WareHouses.Add(WareHouse);
+                Context.Comments.Add(Comment);
                 Context.SaveChanges();
 
                 return Ok(new
                 {
                     Success = true,
-                    Data = WareHouse,
+                    Data = Comment,
                 });
-
             }
             catch
             {
                 return BadRequest();
             }
+
         }
         [HttpPut("{id}")]
-        public IActionResult Edit(string id, WareHouse WarehouseEdit)
+        public IActionResult Disable(string id)
         {
             try
             {
-                var Warehouse = Context.WareHouses.SingleOrDefault(w => w.IDWare == Guid.Parse(id));
-                if (Warehouse == null)
+                var Comment = Context.Comments.SingleOrDefault(i => i.IDCmt == Guid.Parse(id));
+                if (Comment == null)
                 {
                     return NotFound();
                 }
-                if (id != Warehouse.IDWare.ToString())
+                /////update 
+                if (id != Comment.IDCmt.ToString())
                 {
                     return BadRequest();
                 }
-                Warehouse.NameWare = WarehouseEdit.NameWare;
-                Warehouse.Address = WarehouseEdit.Address;
+               
+                Comment.Enable = 0;
                 Context.SaveChanges();
-                return Ok(WarehouseEdit);
+
+                return Ok(Comment);
             }
             catch
             {
@@ -101,4 +101,3 @@ namespace WEB_BELIY_API.Controllers
 
     }
 }
-

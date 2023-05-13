@@ -75,23 +75,24 @@ namespace WEB_BELIY_API.Controllers
             }
             }
             [HttpPut("{id}")]
-            public IActionResult Edit( string id, Supplier supplieredit)
+            public IActionResult Edit( string id, Supplier SupplierEdit)
             {
             try
             {
-                var supplier = Context.Suppliers.SingleOrDefault(p => p.IDSupp == Guid.Parse(id));
-                if (supplier == null)
+                var Supplier = Context.Suppliers.SingleOrDefault(p => p.IDSupp == Guid.Parse(id));
+                if (Supplier == null)
                 {
                     return NotFound();
                 }
-                if (id != supplier.IDSupp.ToString())
+                if (id != Supplier.IDSupp.ToString())
                 {
                     return BadRequest();
                 }
-                supplier.NameSupp = supplier.NameSupp;
-                supplier.ProductType = supplier.ProductType;
+                Supplier.NameSupp = SupplierEdit.NameSupp;
+                Supplier.ProductType = SupplierEdit.ProductType;
+                Context.SaveChanges();
 
-                return Ok(supplieredit);
+                return Ok(SupplierEdit);
             }
             catch
             {

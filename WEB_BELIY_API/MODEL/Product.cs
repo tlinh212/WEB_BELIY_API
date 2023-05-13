@@ -10,6 +10,7 @@ namespace WEB_BELIY_API.MODEL
     public class Product
     {
         [Key]
+        [Required]
         public Guid IDPro { get; set; }
 
         [Required]
@@ -37,6 +38,7 @@ namespace WEB_BELIY_API.MODEL
         public double Discount { get; set; }
 
         public double SaleRate { get; set; }
-
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

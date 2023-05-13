@@ -75,7 +75,7 @@ namespace WEB_BELIY_API.Controllers
         }
        
         [HttpPut("{id}")]
-        public IActionResult Edit(string id, Product productedit  )
+        public IActionResult Edit(string id, Product productEdit  )
         {
             try
             {
@@ -90,16 +90,17 @@ namespace WEB_BELIY_API.Controllers
                     return BadRequest();
                 }
           
-                product.NamePro = product.NamePro;
-                product.IDCat = product.IDCat;
-                product.IDImp = product.IDImp;                
-                product.Price = product.Price;
-                product.Quantity = product.Quantity;
-                product.Description = product.Description;
-                product.Discount = product.Discount;
-                product.SaleRate = product.SaleRate;
+                product.NamePro = productEdit.NamePro;
+                product.IDCat = productEdit.IDCat;
+                product.IDImp = productEdit.IDImp;                
+                product.Price = productEdit.Price;
+                product.Quantity = productEdit.Quantity;
+                product.Description = productEdit.Description;
+                product.Discount = productEdit.Discount;
+                product.SaleRate = productEdit.SaleRate;
+                Context.SaveChanges();
 
-                return Ok(productedit);
+                return Ok(productEdit);
             }
             catch
             {

@@ -54,6 +54,7 @@ namespace WEB_BELIY_API.Controllers
                 {
                     IDPromotion = Guid.NewGuid(), 
                     NamePromotion = NamePromotion, 
+                    Discount = Discount,
                     BeginDate = BeginDate, 
                     EndDate = EndDate,                    
                 };
@@ -74,26 +75,28 @@ namespace WEB_BELIY_API.Controllers
             }
         }
         [HttpPut("{id}")]
-        public IActionResult Edit(string id, Promotion promotionedit)
+        public IActionResult Edit(string id, Promotion PromotionEdit)
         {
             try
             {
-                var promotion = Context.Promotions.SingleOrDefault(p => p.IDPromotion == Guid.Parse(id));
-                if (promotion == null)
+                var Promotion = Context.Promotions.SingleOrDefault(p => p.IDPromotion == Guid.Parse(id));
+                if (Promotion == null)
                 {
                     return NotFound();
                 }
-                if (id != promotion.IDPromotion.ToString())
+                if (id != Promotion.IDPromotion.ToString())
                 {
                     return BadRequest();
                 }
-                promotion.NamePromotion = promotion.NamePromotion;
-                promotion.Discount = promotion.Discount;
-                promotion.BeginDate = promotion.BeginDate;
-                promotion.EndDate = promotion.EndDate;
+                Promotion.NamePromotion = PromotionEdit.NamePromotion;
+                Promotion.Discount = PromotionEdit.Discount;
+                Promotion.BeginDate = PromotionEdit.BeginDate;
+                Promotion.EndDate = PromotionEdit.EndDate;
+
+                Context.SaveChanges(); 
 
 
-                return Ok(promotionedit);
+                return Ok(PromotionEdit);
             }
             catch
             {
